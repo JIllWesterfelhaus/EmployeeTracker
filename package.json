@@ -1,0 +1,20 @@
+{
+  "name": "employeetracker",
+  "version": "1.0.0",
+  "description": "Assigment for Northwestern Coding Bootcamp.  Not completed as of 4/27/20.",
+  "main": "npm install inquirer",
+  "dependencies": {
+    "inquirer": "^7.1.0",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "npm install mysql"
+  },
+  "author": "",
+  "license": "ISC"
+}
