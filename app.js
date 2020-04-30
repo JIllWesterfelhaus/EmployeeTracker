@@ -1,25 +1,119 @@
 //from Employee Summary
-//set up inquirer//
-const render = require("./lib/htmlrenderer")
-const inquirer = require("inquirer")
-const Manager = require("./lib/Manager")
-const Engineer = require("./lib/Engineer")
-const Intern = require("./lib/Intern")
 const path = require("path")
 const fs = require("fs")
-const output_dir = path.resolve(__dirname,"output")
-const output_path = path.join(output_dir,"team.html")
-let team = []
+//set up inquirer//
+//from GreatBay class exercise
+var mysql = require("mysql");
+var inquirer = require("inquirer");
+
+// create the connection information for the sql database
+var connection = mysql.createConnection({
+  host: "localhost",
+
+  // Your port; if not 3306
+  port: 3306,
+
+  // Your username
+  user: "root",
+
+  // Your password
+  password: "mySQL1234!",
+  database: "greatBay_DB"
+});
+
+// connect to the mysql server and sql database
+connection.connect(function(err) {
+  if (err) throw err;
+  // run the start function after the connection is made to prompt the user
+  start();
+});
+
+
 function init() {
     //set up prompts
     inquirer.prompt([
-
+//first question
         {
             type: "list",
             message: "What would you like to do?",
-            choices: ["View All Employees", "View All Departments", "View All Roles", "Add Employee", "Add Department", "Add Role", "Update Employee Role"],
+            choices: ["Add", "View", "Update"],
             name: "choices"
         },
+//questions for add
+.then(function (response) {
+    console.log(response)
+    if (response.choices === "Add") {
+        inquirer.prompt([
+            {
+                type: "list",
+                message: "What would you like to add?",
+                choices: ["Employee", "Department", "Role"],
+                name: "choiceAdd"
+            },
+//questions for add employee
+.then(function (response) {
+    console.log(response)
+    if (response.choices === "Employee") {
+        inquirer.prompt([
+            {
+            type: "input",
+            message:  "What is the employee's first name?",
+            name: "firstName"
+            },
+
+            {
+            type: "input",
+            message:  "What is the employee's last name?",
+            name: "lastName"
+            },
+
+            {
+            type:  "input",
+            message: "What is the employee's role?",
+            name: "role"
+            },
+
+            {
+            type: "input",
+            message:  "Who is the employee's manager?"
+            name: "manager"
+            },
+            {
+            type: "number",
+            message:  "What is the employee's id?",
+            name:  "id"
+            },
+
+
+
+
+
+            }
+
+
+
+
+
+
+
+            {
+                type: "list",
+                message: "Would you like to register another employee?",
+                choices: ["Yes", "No"],
+                name: "restart"
+            },
+        ])
+        
+            .then(function (managerRes) {
+                let newManager = new Manager(response.name, response.id, response.email, managerRes.officeNum)
+                team.push(newManager)
+                if (managerRes.restart==="Yes") {
+                    init()
+                } else {
+                    writeHTML(render(team))
+                }
+
+
 
         {
             type: "input",
@@ -38,32 +132,7 @@ function init() {
         },
         
     ])
-    //questions for each specific role
-        .then(function (response) {
-            console.log(response)
-            if (response.role === "Manager") {
-                inquirer.prompt([
-                    {
-                        type: "input",
-                        message: "What is the manager's office number?",
-                        name: "officeNum"
-                    },
-                    {
-                        type: "list",
-                        message: "Would you like to register another employee?",
-                        choices: ["Yes", "No"],
-                        name: "restart"
-                    },
-                ])
-                
-                    .then(function (managerRes) {
-                        let newManager = new Manager(response.name, response.id, response.email, managerRes.officeNum)
-                        team.push(newManager)
-                        if (managerRes.restart==="Yes") {
-                            init()
-                        } else {
-                            writeHTML(render(team))
-                        }
+    
 
             
                         
