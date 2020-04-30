@@ -18,7 +18,7 @@ var connection = mysql.createConnection({
 
   // Your password
   password: "mySQL1234!",
-  database: "greatBay_DB"
+  database: "tracker"
 });
 
 // connect to the mysql server and sql database
