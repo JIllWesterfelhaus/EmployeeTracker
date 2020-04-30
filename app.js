@@ -36,9 +36,10 @@ function init() {
         {
             type: "list",
             message: "What would you like to do?",
-            choices: ["Add", "View", "Update"],
+            choices: ["Add", "View", "Update Employee Role"],
             name: "choices"
         },
+//if view, show employees, departments or roles table
 //questions for add
 .then(function (response) {
     console.log(response)
@@ -75,33 +76,48 @@ function init() {
 
             {
             type: "input",
-            message:  "Who is the employee's manager?"
+            message:  "Who is the employee's manager?",
             name: "manager"
             },
             {
             type: "number",
             message:  "What is the employee's id?",
-            name:  "id"
+            name:  "employeeId"
             },
-
-
-
-
-
-            }
-
-
-
-
-
-
-
+             //add department
             {
-                type: "list",
-                message: "Would you like to register another employee?",
-                choices: ["Yes", "No"],
-                name: "restart"
+            type: "number",
+            message: "What is the department ID?",
+            name: "deptId"
             },
+            {
+             type: "input",
+            message: "What is the department name?",
+            name: "deptName" 
+            },
+            //add role
+            {
+            type: "number",
+            message: "What is the role ID?",
+            name: "roleId"
+            },
+            {
+             type: "input",
+             message: "What is the role title?",
+            name: "role"  
+            },
+            {
+            type: "number",
+            message:  "What is the role salary?",
+            name: "salary"
+            },
+            {
+            type: "number",
+            Message: "What is the department ID?",
+            name: "deptId"   
+            },
+
+            
         ])
         
             .then(function (managerRes) {
@@ -133,7 +149,7 @@ function init() {
         
     ])
     
-
+//update: retrieve existing employee and update role
             
                         
                         console.log(team)
