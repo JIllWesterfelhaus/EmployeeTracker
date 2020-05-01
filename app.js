@@ -18,7 +18,7 @@ var connection = mysql.createConnection({
 
   // Your password
   password: "mySQL1234!",
-  database: "tracker"
+  database: "tracker_db"
 });
 
 // connect to the mysql server and sql database
@@ -27,29 +27,26 @@ connection.connect(function(err) {
   // run the start function after the connection is made to prompt the user
   start();
 });
-
-
 function init() {
     //set up prompts
     inquirer.prompt([
 //first question
         {
+            name: "addViewUpdate",
             type: "list",
             message: "What would you like to do?",
-            choices: ["Add", "View", "Update Employee Role"],
-            name: "choices"
+            choices: ["Add", "View", "Update Employee Role"] 
         },
 //if view, show employees, departments or roles table
 //questions for add
 .then(function (response) {
-    console.log(response)
-    if (response.choices === "Add") {
+    if (response.addViewUpdate === "Add") {
         inquirer.prompt([
             {
+                name: "choiceAdd",
                 type: "list",
                 message: "What would you like to add?",
-                choices: ["Employee", "Department", "Role"],
-                name: "choiceAdd"
+                choices: ["Employee", "Department", "Role"]  
             },
 //questions for add employee
 .then(function (response) {
@@ -57,69 +54,69 @@ function init() {
     if (response.choices === "Employee") {
         inquirer.prompt([
             {
-            type: "input",
-            message:  "What is the employee's first name?",
-            name: "firstName"
+                name: "firstName",
+                type: "input",
+            message:  "What is the employee's first name?"
             },
 
             {
-            type: "input",
-            message:  "What is the employee's last name?",
-            name: "lastName"
+                name: "lastName",
+                type: "input",
+                message:  "What is the employee's last name?"
             },
 
             {
-            type:  "input",
-            message: "What is the employee's role?",
-            name: "role"
+                name: "role",
+                type:  "input",
+            message: "What is the employee's role?"
             },
 
             {
-            type: "input",
-            message:  "Who is the employee's manager?",
-            name: "manager"
+                name: "manager",
+                type: "input",
+            message:  "Who is the employee's manager?"
             },
             {
-            type: "number",
-            message:  "What is the employee's id?",
-            name:  "employeeId"
+                name:  "employeeId",
+                type: "number",
+            message:  "What is the employee's id?"
             },
              //add department
             {
-            type: "number",
-            message: "What is the department ID?",
-            name: "deptId"
+                name: "deptId",
+                type: "number",
+            message: "What is the department ID?"
             },
             {
-             type: "input",
-            message: "What is the department name?",
-            name: "deptName" 
+                name: "deptName",
+                type: "input",
+            message: "What is the department name?"
             },
             //add role
             {
-            type: "number",
-            message: "What is the role ID?",
-            name: "roleId"
+                name: "roleId",
+                type: "number",
+            message: "What is the role ID?"
             },
             {
-             type: "input",
-             message: "What is the role title?",
-            name: "role"  
+                name: "role",
+                type: "input",
+             message: "What is the role title?"
             },
             {
-            type: "number",
-            message:  "What is the role salary?",
-            name: "salary"
+                name: "salary",
+                type: "number",
+            message:  "What is the role salary?"
             },
             {
-            type: "number",
-            Message: "What is the department ID?",
-            name: "deptId"   
+                name: "deptId",
+                type: "number",
+            Message: "What is the department ID?"    
             },
 
             
         ])
-        
+        ///from employee tracker
             .then(function (managerRes) {
                 let newManager = new Manager(response.name, response.id, response.email, managerRes.officeNum)
                 team.push(newManager)
@@ -129,26 +126,8 @@ function init() {
                     writeHTML(render(team))
                 }
 
-
-
-        {
-            type: "input",
-            message: "Please begin here to register your new employee.  What is the new employee's name?",
-            name: "name"
-        },
-        {
-            type: "input",
-            message: "What is the employee's ID number?",
-            name: "id"
-        },
-        {
-            type: "input",
-            message: "What is the employee's email?",
-            name: "email"
-        },
-        
-    ])
-    
+       
+    ])   
 //update: retrieve existing employee and update role
             
                         
@@ -159,17 +138,7 @@ function init() {
 
             if (response.role === "Engineer") {
                 inquirer.prompt([
-                    {
-                        type: "input",
-                        message: "What is the engineer's GitHub username?",
-                        name: "userName"
-                    },
-                    {
-                        type: "list",
-                        message: "Would you like to register another employee?",
-                        choices: ["Yes", "No"],
-                        name: "restart"
-                    },
+                    
 
                 ])
                 .then(function (engineerRes) {
@@ -189,17 +158,7 @@ function init() {
 
             if (response.role === "Intern") {
                 inquirer.prompt([
-                    {
-                        type: "input",
-                        message: "What school does the intern attend?",
-                        name: "school"
-                    },
-                    {
-                        type: "list",
-                        message: "Would you like to register another employee?",
-                        choices: ["Yes", "No"],
-                        name: "restart"
-                    },
+                   
 
                 ])
                 .then(function (internRes) {

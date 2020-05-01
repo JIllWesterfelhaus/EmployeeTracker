@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS tracker;
-CREATE DATABASE tracker;
-USE tracker;
+DROP DATABASE IF EXISTS tracker_db;
+CREATE DATABASE tracker_db;
+USE tracker_db;
 CREATE TABLE department (
     id INT (10),
     name VARCHAR (50)
