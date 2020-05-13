@@ -48,6 +48,30 @@ function init() {
                         message: "What would you like to add?",
                         choices: ["Employee", "Department", "Role"]
                     },
+//question for view
+.then(function (response) {
+    if (response.addViewUpdate === "View") {
+        inquirer.prompt([
+            {
+                name: "choiceAdd",
+                type: "list",
+                message: "What would you like to view?",
+                choices: ["All Employees", "All Departments", "All Roles"]
+            },
+//generate table per user's response//
+
+//question for update//
+.then(function (response) {
+    if (response.addViewUpdate === "Update") {
+        inquirer.prompt([
+            {
+                name: "choiceUpdate",
+                type: "input",
+                message: "Which emaployee would you like to update?",
+                //list employees
+                choices: ["Employee", "Department", "Role"]
+            },
+
 //questions for add employee
 .then(function (response) {
                         console.log(response)
@@ -115,6 +139,8 @@ function init() {
                                     Message: "What is the department ID?"
                                 },
                             ])
+     //questions for update employee
+     //colums to update: id, first name, last name, role_id, manager_id                       
                                 
 
 

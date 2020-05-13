@@ -4,6 +4,7 @@
   "description": "Assigment for Northwestern Coding Bootcamp.  Not completed as of 4/27/20.",
   "main": "npm install inquirer",
   "dependencies": {
+    "console.table": "^0.10.0",
     "inquirer": "^7.1.0",
     "mysql": "^2.18.1"
   },
