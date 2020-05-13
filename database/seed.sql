@@ -16,8 +16,8 @@ VALUES (12, "Accountant", 60000, 2);
 INSERT INTO employee (id, first_name, last_name, role_id)
 VALUES (20, "Bill", "Lumbergh", 11);
 
-INSERT INTO employee (id, first_name, last_name, role_id)
-VALUES (21, "Peter", "Gibbons", 10);
+INSERT INTO employee (id, first_name, last_name, role_id, manager_id)
+VALUES (21, "Peter", "Gibbons", 10, 20);
 
-INSERT INTO employee (id, first_name, last_name, role_id)
-VALUES (22, "Milton", "Waddams", 12);
+INSERT INTO employee (id, first_name, last_name, role_id, manager_id)
+VALUES (22, "Milton", "Waddams", 12, 20);
