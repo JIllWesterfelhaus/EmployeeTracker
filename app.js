@@ -15,7 +15,6 @@ var connection = mysql.createConnection({
 
     // Your username
     user: "root",
-
     // Your password
     password: "mySQL1234!",
     database: "tracker_db"
@@ -27,7 +26,7 @@ connection.connect(function (err) {
     // run the start function after the connection is made to prompt the user
     start();
 });
-function init() {
+function start() {
     //set up prompts
     inquirer.prompt([
         //first question
@@ -36,112 +35,139 @@ function init() {
             type: "list",
             message: "What would you like to do?",
             choices: ["Add", "View", "Update Employee Role"]
-        },
+    }])
 //if view, show employees, departments or roles table
 //questions for add
-.then(function (response) {
-            if (response.addViewUpdate === "Add") {
-                inquirer.prompt([
-                    {
-                        name: "choiceAdd",
-                        type: "list",
-                        message: "What would you like to add?",
-                        choices: ["Employee", "Department", "Role"]
-                    },
-//question for view
-.then(function (response) {
-    if (response.addViewUpdate === "View") {
-        inquirer.prompt([
+    .then(function (response) {
+        switch (response.addViewUpdate) {
+            case "Add":
+                add();
+                break;
+            case "View":
+                view();
+                break;
+            case "Update Employee Role":
+                updateEmployeeRole();
+                break;
+            default: console.log("Please enter appropriate choice.")   
+        }
+      })}
+function add() {
+    inquirer.prompt([
+        {
+        name: "firstName",
+        type: "input",
+        message: "What is the employee's first name?"
+        },
+
+        {
+        name: "lastName",
+            type: "input",
+            message: "What is the employee's last name?"
+         },
+
+        {
+        name: "role",
+        type: "input",
+        message: "What is the employee's role?"
+        },
+
+        {
+        name: "manager",
+        type: "input",
+        message: "Who is the employee's manager?"
+        },
+
+        {
+        name: "employeeId",
+        type: "number",
+         message: "What is the employee's id?"
+        },
+        //add department
+        {
+        name: "deptId",
+        type: "number",
+        message: "What is the department ID?"
+        },
+
+        {
+        name: "deptName",
+        type: "input",
+        message: "What is the department name?"
+        },
+        //add role
+        {
+        name: "roleId",
+        type: "number",
+        message: "What is the role ID?"
+        },
+
+        {
+        name: "role",
+        type: "input",
+        message: "What is the role title?"
+        },
+
+        {
+        name: "salary",
+        type: "number",
+         message: "What is the role salary?"
+        },
+
+        {
+        name: "deptId",
+         type: "number",
+        Message: "What is the department ID?"
+        },
+          ])  .then(function (response) {
+            console.log (response)
+
+          })
+}
+ function view () {
+    inquirer.prompt([
+        {
+        name: "choiceView",
+        type: "list",
+        message: "What would you like to view?",
+        choices: ["All Employees", "All Departments", "All Roles"]
+    }])  .then(function (response)  {
+        switch (response) {
+            case "All Employees":
+                allEmployees();
+                break;
+            case "All Departments":
+                allDepartments();
+                break;
+            case "All Roles":
+                allRoles();
+                break;
+            default: console.log("Please enter appropriate choice.")   
+        }
+    })
+ }
+
+ function updateEmployeeRole () {
+    inquirer.prompt([
+        {
+            name: "choiceUpdate",
+            type: "list",
+            message: "Which employee would you like to update?",
+           ////// //list employees
+            choices: ["All Employees"]
+            },
             {
-                name: "choiceAdd",
+                name: "role",
                 type: "list",
-                message: "What would you like to view?",
-                choices: ["All Employees", "All Departments", "All Roles"]
-            },
-//generate table per user's response//
+                message: "What is the employee's new role?",
+                choices:  ["Salesperson", "Finance Manager", "Accountant"]
+            }])  .then(function (response) {
+                console.log(response)
 
-//question for update//
-.then(function (response) {
-    if (response.addViewUpdate === "Update") {
-        inquirer.prompt([
-            {
-                name: "choiceUpdate",
-                type: "input",
-                message: "Which emaployee would you like to update?",
-                //list employees
-                choices: ["Employee", "Department", "Role"]
-            },
-
-//questions for add employee
-.then(function (response) {
-                        console.log(response)
-                        if (response.choices === "Employee") {
-                            inquirer.prompt([
-                                {
-                                    name: "firstName",
-                                    type: "input",
-                                    message: "What is the employee's first name?"
-                                },
-
-                                {
-                                    name: "lastName",
-                                    type: "input",
-                                    message: "What is the employee's last name?"
-                                },
-
-                                {
-                                    name: "role",
-                                    type: "input",
-                                    message: "What is the employee's role?"
-                                },
-
-                                {
-                                    name: "manager",
-                                    type: "input",
-                                    message: "Who is the employee's manager?"
-                                },
-
-                                {
-                                    name: "employeeId",
-                                    type: "number",
-                                    message: "What is the employee's id?"
-                                },
-                                //add department
-                                {
-                                    name: "deptId",
-                                    type: "number",
-                                    message: "What is the department ID?"
-                                },
-                                {
-                                    name: "deptName",
-                                    type: "input",
-                                    message: "What is the department name?"
-                                },
-                                //add role
-                                {
-                                    name: "roleId",
-                                    type: "number",
-                                    message: "What is the role ID?"
-                                },
-                                {
-                                    name: "role",
-                                    type: "input",
-                                    message: "What is the role title?"
-                                },
-                                {
-                                    name: "salary",
-                                    type: "number",
-                                    message: "What is the role salary?"
-                                },
-                                {
-                                    name: "deptId",
-                                    type: "number",
-                                    Message: "What is the department ID?"
-                                },
-                            ])
-     //questions for update employee
-     //colums to update: id, first name, last name, role_id, manager_id                       
-                                
+            })
+ }
+ 
 
 
-init()
+    
+
