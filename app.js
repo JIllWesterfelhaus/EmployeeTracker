@@ -96,6 +96,7 @@ function add() {
         type: "input",
         message: "What is the department name?"
         },
+        //end add department
         //add role
         {
         name: "roleId",
