@@ -83,6 +83,7 @@ function add() {
         type: "number",
          message: "What is the employee's id?"
         },
+        //end here to add employee
         //add department
         {
         name: "deptId",
@@ -114,11 +115,7 @@ function add() {
          message: "What is the role salary?"
         },
 
-        {
-        name: "deptId",
-         type: "number",
-        Message: "What is the department ID?"
-        },
+        
           ])  .then(function (response) {
             console.log (response)
             //enter mysql code here
@@ -154,7 +151,7 @@ function add() {
             name: "choiceUpdate",
             type: "list",
             message: "Which employee would you like to update?",
-           ////// //list employees
+            //list employees, or input field? or table with employees?
             choices: ["All Employees"]
             },
             {
