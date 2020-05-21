@@ -121,6 +121,7 @@ function add() {
         },
           ])  .then(function (response) {
             console.log (response)
+            //enter mysql code here
 
           })
 }
