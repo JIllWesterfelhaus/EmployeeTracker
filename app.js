@@ -83,8 +83,7 @@ function add() {
         type: "number",
          message: "What is the employee's id?"
         },
-        //end here to add employee
-        //add department
+     
         {
         name: "deptId",
         type: "number",
@@ -115,14 +114,12 @@ function add() {
         type: "number",
          message: "What is the role salary?"
         },
-
-        
-          ])  .then(function (response) {
+     ] )  .then(function (response) {
             console.log (response)
             //enter mysql code here
 
           })
-}
+        
  function view () {
     inquirer.prompt([
         {
@@ -164,7 +161,7 @@ function add() {
                 console.log(response)
 
             })
- }
+ }}
  
 
 
