@@ -83,7 +83,8 @@ function add() {
         type: "number",
          message: "What is the employee's id?"
         },
-     
+     //end add employee
+     //start add department
         {
         name: "deptId",
         type: "number",
