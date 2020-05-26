@@ -34,8 +34,8 @@ function start() {
             message: "What would you like to do?",
             choices: ["Add", "View", "Update Employee Role"]
     }])
-//if view, show employees, departments or roles table
-//questions for add
+//if view, show employees, departments or roles table, that is all
+//questions for add, should this be here?
     .then(function (response) {
         switch (response.addViewUpdate) {
             case "Add":
@@ -50,7 +50,7 @@ function start() {
             default: console.log("Please enter appropriate choice.")   
         }
       })}
-///choices for add, skipped past this, went to Employee
+///attempting to get user to make a choice for add, skipped past this, went to Employee; need to offer choice of what to add
       function add() {
         //set up prompts
         inquirer.prompt([
@@ -63,21 +63,22 @@ function start() {
         }])
     //questions for add
         .then(function (response) {
-            switch (response.addViewUpdate) {
+            switch (response.employeeRoleDepartment) {
                 case "Employee":
-                    add();
+                    /////
+                    addEmployee();
                     break;
                 case "Role":
-                    add();
+                    addRole();
                     break;
                 case "Department":
-                    add();
+                    addDepartment();
                     break;
                 default: console.log("Please enter appropriate choice.")   
             }
           })}
 //changed to match table
-function add() {
+function addEmployee() {
     inquirer.prompt([
         {
         name: "first_name",
@@ -90,7 +91,7 @@ function add() {
             type: "input",
             message: "What is the employee's last name?"
          },
-         //link to role table for id
+         //link to role table for  role id, this will provide department name
         {
         name: "role",
         type: "input",
@@ -108,15 +109,35 @@ function add() {
         type: "number",
          message: "What is the employee's id?"
         },
-
-    (function (response) {
+    ])
+//trying to update mysql table and display in console.table
+ .then(function (response) {
             console.table (response)
-           let sql = "INSERT INTO employee (id, first_name, last_name, role)";
+           let query = connection.query("INSERT INTO employee SET ?", 
+           {
+              first_name: response.first_name,
+              last_name: response.last_name,
+              role: response.role,
+              manager: response.manager,
+              id: response.id
+
+           },
+           function (err,res) {
+               if (err) throw err
+               console.log(res)
+           }
+           )
             //values entered above from prompts
-          }),
+            start()
+          })
+        }
      //end add employee
    
      //start add department
+
+     function addDepartment() {
+        inquirer.prompt([
+
         {
         name: "deptId",
         type: "number",
@@ -128,8 +149,16 @@ function add() {
         type: "input",
         message: "What is the department name?"
         },
+    ])
+    .then(function (response) {
+        console.table (response)
+        start()
+    } )
+}
+    //sql operations here
         //end add department
-
+     function addRole() {
+            inquirer.prompt([
 
         //add role
         {
@@ -149,12 +178,15 @@ function add() {
         type: "number",
          message: "What is the role salary?"
         },
-     ] )  .then(function (response) {
+     ] ) 
+      .then(function (response) {
             console.table (response)
             //enter mysql code here
-
+start()
           })
-        
+        }
+        //end add role
+        //for view, just need to display chosen table on terminal
  function view () {
     inquirer.prompt([
         {
@@ -163,40 +195,68 @@ function add() {
         message: "What would you like to view?",
         choices: ["All Employees", "All Departments", "All Roles"]
     }])  .then(function (response)  {
-        switch (response) {
+        switch (response.choiceView) {
+            //changed names to match table; view tables in terminal with console.table
             case "All Employees":
-                allEmployees();
+                employee();
                 break;
             case "All Departments":
-                allDepartments();
+                department();
                 break;
             case "All Roles":
-                allRoles();
+                role();
                 break;
             default: console.log("Please enter appropriate choice.")   
+            //need console.table prompt here
         }
     })
  }
+function employee () {
+    let query = "SELECT * FROM employee"
+     connection.query(query, function(err, res) {
+        console.table(res)
+        start()
+     })}
+
+     function department () {
+        let query = "SELECT * FROM department"
+         connection.query(query, function(err, res) {
+            console.table(res)
+            start()
+         })}
+
+         function role () {
+            let query = "SELECT * FROM role"
+             connection.query(query, function(err, res) {
+                console.table(res)
+                start()
+             })}
 
  function updateEmployeeRole () {
+     let query = "SELECT * FROM employee"
+     connection.query(query, function(err, res) {
+        console.table(res)
+     })
+     
+
     inquirer.prompt([
         {
             name: "choiceUpdate",
-            type: "list",
-            message: "Which employee would you like to update?",
-            //list employees, or input field? or table with employees?
-            choices: ["All Employees"]
+            type: "input",
+            message: "What is the ID of the employee you want to update?",
+           //Display table with all employees here and user chooses from table?
             },
             {
                 name: "role",
                 type: "list",
                 message: "What is the employee's new role?",
                 choices:  ["Salesperson", "Finance Manager", "Accountant"]
-            }])  .then(function (response) {
+            }]) 
+             .then(function (response) {
                 console.table(response)
-
+    start()
             })
- }}
+ }
  
 
 
