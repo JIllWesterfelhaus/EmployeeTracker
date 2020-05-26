@@ -91,17 +91,17 @@ function addEmployee() {
             type: "input",
             message: "What is the employee's last name?"
          },
-         //link to role table for  role id, this will provide department name
+         //link to role table for role id, this will provide department name
         {
-        name: "role",
+        name: "role_id",
         type: "input",
-        message: "What is the employee's role?"
+        message: "What is the employee's role ID number?"
         },
 
         {
-        name: "manager",
+        name: "manager_id",
         type: "input",
-        message: "Who is the employee's manager?"
+        message: "What is the manager's ID number?"
         },
 
         {
@@ -110,15 +110,15 @@ function addEmployee() {
          message: "What is the employee's id?"
         },
     ])
-//trying to update mysql table and display in console.table
+//update mysql table and display in console.table
  .then(function (response) {
             console.table (response)
            let query = connection.query("INSERT INTO employee SET ?", 
            {
               first_name: response.first_name,
               last_name: response.last_name,
-              role: response.role,
-              manager: response.manager,
+              role_id: response.role_id,
+              manager_id: response.manager_id,
               id: response.id
 
            },
@@ -150,12 +150,29 @@ function addEmployee() {
         message: "What is the department name?"
         },
     ])
-    .then(function (response) {
-        console.table (response)
-        start()
-    } )
-}
-    //sql operations here
+    //.then(function (response) {
+       // console.table (response)
+       // start()
+   // } )
+//}
+    //update mysql table and display in console.table
+ .then(function (response) {
+    console.table (response)
+   let query = connection.query("INSERT INTO department SET ?", 
+   {
+    id: response.id,
+    name: response.name,
+      
+   },
+   function (err,res) {
+       if (err) throw err
+       console.log(res)
+   }
+   )
+    
+    start()
+  })
+
         //end add department
      function addRole() {
             inquirer.prompt([
@@ -182,9 +199,26 @@ function addEmployee() {
       .then(function (response) {
             console.table (response)
             //enter mysql code here
-start()
-          })
-        }
+            let query = connection.query("INSERT INTO department SET ?", 
+   {
+        roleId: response.roleId,
+        role: response.role,
+        salary: response.salary
+      
+   },
+   function (err,res) {
+       if (err) throw err
+       console.log(res)
+   } )
+    
+    start()
+  })
+
+
+
+//start()
+          //})
+       //}
         //end add role
         //for view, just need to display chosen table on terminal
  function view () {
@@ -254,9 +288,10 @@ function employee () {
             }]) 
              .then(function (response) {
                 console.table(response)
+//add sql code here?
     start()
             })
- }
+ }}}
  
 
 
