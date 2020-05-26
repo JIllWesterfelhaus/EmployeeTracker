@@ -1,10 +1,8 @@
-//from Employee Summary
 const path = require("path")
 const fs = require("fs")
 //set up inquirer//
-//from GreatBay class exercise
-var mysql = require("mysql");
-var inquirer = require("inquirer");
+let mysql = require("mysql");
+let inquirer = require("inquirer");
 
 // create the connection information for the sql database
 var connection = mysql.createConnection({
@@ -52,20 +50,47 @@ function start() {
             default: console.log("Please enter appropriate choice.")   
         }
       })}
+///choices for add, skipped past this, went to Employee
+      function add() {
+        //set up prompts
+        inquirer.prompt([
+            //first question
+            {
+                name: "employeeRoleDepartment",
+                type: "list",
+                message: "What would you like to add?",
+                choices: ["Employee", "Role", "Department"]
+        }])
+    //questions for add
+        .then(function (response) {
+            switch (response.addViewUpdate) {
+                case "Employee":
+                    add();
+                    break;
+                case "Role":
+                    add();
+                    break;
+                case "Department":
+                    add();
+                    break;
+                default: console.log("Please enter appropriate choice.")   
+            }
+          })}
+//changed to match table
 function add() {
     inquirer.prompt([
         {
-        name: "firstName",
+        name: "first_name",
         type: "input",
         message: "What is the employee's first name?"
         },
 
         {
-        name: "lastName",
+        name: "last_name",
             type: "input",
             message: "What is the employee's last name?"
          },
-
+         //link to role table for id
         {
         name: "role",
         type: "input",
@@ -79,11 +104,18 @@ function add() {
         },
 
         {
-        name: "employeeId",
+        name: "id",
         type: "number",
          message: "What is the employee's id?"
         },
+
+    (function (response) {
+            console.table (response)
+           let sql = "INSERT INTO employee (id, first_name, last_name, role)";
+            //values entered above from prompts
+          }),
      //end add employee
+   
      //start add department
         {
         name: "deptId",
@@ -97,6 +129,8 @@ function add() {
         message: "What is the department name?"
         },
         //end add department
+
+
         //add role
         {
         name: "roleId",
@@ -116,7 +150,7 @@ function add() {
          message: "What is the role salary?"
         },
      ] )  .then(function (response) {
-            console.log (response)
+            console.table (response)
             //enter mysql code here
 
           })
@@ -159,7 +193,7 @@ function add() {
                 message: "What is the employee's new role?",
                 choices:  ["Salesperson", "Finance Manager", "Accountant"]
             }])  .then(function (response) {
-                console.log(response)
+                console.table(response)
 
             })
  }}
