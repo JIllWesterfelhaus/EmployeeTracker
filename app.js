@@ -248,7 +248,7 @@ function employee () {
                 start()
              })}
 
- function updateEmployeeRole () {
+ function updateEmployeeRole() {
      let query = "SELECT * FROM employee"
      connection.query(query, function(err, res) {
         console.table(res)
