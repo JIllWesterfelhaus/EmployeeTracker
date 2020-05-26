@@ -34,8 +34,8 @@ function start() {
             message: "What would you like to do?",
             choices: ["Add", "View", "Update Employee Role"]
     }])
-//if view, show employees, departments or roles table, that is all
-//questions for add, should this be here?
+//if view, show employees, departments or roles table
+
     .then(function (response) {
         switch (response.addViewUpdate) {
             case "Add":
@@ -50,7 +50,7 @@ function start() {
             default: console.log("Please enter appropriate choice.")   
         }
       })}
-///attempting to get user to make a choice for add, skipped past this, went to Employee; need to offer choice of what to add
+//choice of what to add
       function add() {
         //set up prompts
         inquirer.prompt([
@@ -65,7 +65,6 @@ function start() {
         .then(function (response) {
             switch (response.employeeRoleDepartment) {
                 case "Employee":
-                    /////
                     addEmployee();
                     break;
                 case "Role":
@@ -77,7 +76,7 @@ function start() {
                 default: console.log("Please enter appropriate choice.")   
             }
           })}
-//changed to match table
+
 function addEmployee() {
     inquirer.prompt([
         {
@@ -125,15 +124,12 @@ function addEmployee() {
            function (err,res) {
                if (err) throw err
                console.log(res)
-           }
-           )
+           })
             //values entered above from prompts
             start()
           })
         }
-     //end add employee
-   
-     //start add department
+     //end add employee, start add department
 
      function addDepartment() {
         inquirer.prompt([
@@ -150,12 +146,7 @@ function addEmployee() {
         message: "What is the department name?"
         },
     ])
-    //.then(function (response) {
-       // console.table (response)
-       // start()
-   // } )
-//}
-    //update mysql table and display in console.table
+    
  .then(function (response) {
     console.table (response)
    let query = connection.query("INSERT INTO department SET ?", 
@@ -167,17 +158,15 @@ function addEmployee() {
    function (err,res) {
        if (err) throw err
        console.log(res)
-   }
-   )
-    
+   })
+   
     start()
   })
-
         //end add department
+
      function addRole() {
             inquirer.prompt([
 
-        //add role
         {
         name: "roleId",
         type: "number",
@@ -214,14 +203,7 @@ function addEmployee() {
     start()
   })
 
-
-
-//start()
-          //})
-       //}
-        //end add role
-        //for view, just need to display chosen table on terminal
- function view () {
+ function view() {
     inquirer.prompt([
         {
         name: "choiceView",
@@ -230,7 +212,7 @@ function addEmployee() {
         choices: ["All Employees", "All Departments", "All Roles"]
     }])  .then(function (response)  {
         switch (response.choiceView) {
-            //changed names to match table; view tables in terminal with console.table
+            
             case "All Employees":
                 employee();
                 break;
@@ -242,7 +224,7 @@ function addEmployee() {
                 break;
             default: console.log("Please enter appropriate choice.")   
             //need console.table prompt here
-        }
+        }   
     })
  }
 function employee () {
@@ -272,7 +254,6 @@ function employee () {
         console.table(res)
      })
      
-
     inquirer.prompt([
         {
             name: "choiceUpdate",
