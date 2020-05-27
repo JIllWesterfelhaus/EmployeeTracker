@@ -56,10 +56,10 @@ function start() {
         inquirer.prompt([
             //first question
             {
-                name: "employeeRoleDepartment",
+                name: "employeeTitleDepartment",
                 type: "list",
                 message: "What would you like to add?",
-                choices: ["Employee", "Role", "Department"]
+                choices: ["Employee", "Title", "Department"]
         }])
     //questions for add
         .then(function (response) {
@@ -67,8 +67,8 @@ function start() {
                 case "Employee":
                     addEmployee();
                     break;
-                case "Role":
-                    addRole();
+                case "Title":
+                    addTitle();
                     break;
                 case "Department":
                     addDepartment();
@@ -161,20 +161,19 @@ function addEmployee() {
    })
    
     start()
-  })
+  })}
         //end add department
 
-     function addRole() {
+     function addTitle() {
             inquirer.prompt([
-
         {
-        name: "roleId",
+        name: "id",
         type: "number",
         message: "What is the role ID?"
         },
 
         {
-        name: "role",
+        name: "title",
         type: "input",
         message: "What is the role title?"
         },
@@ -184,24 +183,29 @@ function addEmployee() {
         type: "number",
          message: "What is the role salary?"
         },
-     ] ) 
+
+        {
+            name: "department_id",
+            type: "number",
+            message: "What is the department ID number?"
+        }
+     ]) 
       .then(function (response) {
             console.table (response)
             //enter mysql code here
             let query = connection.query("INSERT INTO department SET ?", 
    {
-        roleId: response.roleId,
-        role: response.role,
+        id: response.id,
+        title: response.title,
         salary: response.salary
-      
    },
    function (err,res) {
        if (err) throw err
        console.log(res)
-   } )
-    
+   })},
+     
     start()
-  })
+      )}  
 
  function view() {
     inquirer.prompt([
@@ -226,7 +230,7 @@ function addEmployee() {
             //need console.table prompt here
         }   
     })
- }
+}
 function employee () {
     let query = "SELECT * FROM employee"
      connection.query(query, function(err, res) {
@@ -272,7 +276,7 @@ function employee () {
 //add sql code here?
     start()
             })
- }}}
+        }
  
 
 
