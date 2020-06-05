@@ -92,7 +92,7 @@ function addEmployee() {
          },
          //link to role table for role id, this will provide department name
         {
-        name: "role_id",
+        name: "role_id-FK",
         type: "input",
         message: "What is the employee's role ID number?"
         },
@@ -116,7 +116,7 @@ function addEmployee() {
            {
               first_name: response.first_name,
               last_name: response.last_name,
-              role_id: response.role_id,
+              role_id_FK: response.role_id,
               manager_id: response.manager_id,
               id: response.id
 
@@ -135,7 +135,7 @@ function addEmployee() {
         inquirer.prompt([
 
         {
-        name: "deptId",
+        name: "ID_PK",
         type: "number",
         message: "What is the department ID?"
         },
@@ -164,10 +164,10 @@ function addEmployee() {
   })}
         //end add department
 
-     function addTitle() {
+     function addRole() {
             inquirer.prompt([
         {
-        name: "id",
+        name: "ID_PK",
         type: "number",
         message: "What is the role ID?"
         },
