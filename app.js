@@ -56,10 +56,10 @@ function start() {
         inquirer.prompt([
             //first question
             {
-                name: "employeeTitleDepartment",
+                name: "employeeRoleDepartment",
                 type: "list",
                 message: "What would you like to add?",
-                choices: ["Employee", "Title", "Department"]
+                choices: ["Employee", "Role", "Department"]
         }])
     //questions for add
         .then(function (response) {
@@ -67,8 +67,8 @@ function start() {
                 case "Employee":
                     addEmployee();
                     break;
-                case "Title":
-                    addTitle();
+                case "Role":
+                    addRole();
                     break;
                 case "Department":
                     addDepartment();
@@ -92,7 +92,7 @@ function addEmployee() {
          },
          //link to role table for role id, this will provide department name
         {
-        name: "role_id-FK",
+        name: "role_id_FK",
         type: "input",
         message: "What is the employee's role ID number?"
         },
@@ -141,7 +141,7 @@ function addEmployee() {
         },
 
         {
-        name: "deptName",
+        name: "name",
         type: "input",
         message: "What is the department name?"
         },
@@ -151,7 +151,7 @@ function addEmployee() {
     console.table (response)
    let query = connection.query("INSERT INTO department SET ?", 
    {
-    id: response.id,
+    ID_PK: response.ID_PK,
     name: response.name,
       
    },
