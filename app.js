@@ -285,7 +285,7 @@ function employee () {
                 let query = connection.query("UPDATE employee SET WHERE title = ?", 
     start()
                 )})
-              }}
+             })}
  
 
 
