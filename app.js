@@ -92,7 +92,7 @@ function addEmployee() {
          },
          //link to role table for role id, this will provide department name
         {
-        name: "role_id_FK",
+        name: "role_id",
         type: "input",
         message: "What is the employee's role ID number?"
         },
@@ -116,7 +116,7 @@ function addEmployee() {
            {
               first_name: response.first_name,
               last_name: response.last_name,
-              role_id_FK: response.role_id,
+              role_id: response.role_id,
               manager_id: response.manager_id,
               id: response.id
 

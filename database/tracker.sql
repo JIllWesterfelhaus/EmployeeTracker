@@ -15,6 +15,6 @@ CREATE TABLE employee (
     id INT (10),
     first_name VARCHAR (30),
     last_name VARCHAR (30),
-    role_id_FK INT (10),
+    role_id INT (10),
     manager_id INT (10)
 );
