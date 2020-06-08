@@ -193,20 +193,21 @@ function addEmployee() {
       .then(function (response) {
             console.table (response)
             //enter mysql code here
-            let query = connection.query("INSERT INTO department SET ?", 
+            let query = connection.query("INSERT INTO role SET ?", 
    {
-        id: response.id,
+        ID_PK: response.ID_PK,
         title: response.title,
-        salary: response.salary
+        salary: response.salary,
+        department_id:  response.department_id
    },
    function (err,res) {
        if (err) throw err
        console.log(res)
-   })},
+   })
      
     start()
-      )}  
-
+      } ) 
+     }
  function view() {
     inquirer.prompt([
         {
@@ -263,19 +264,20 @@ function employee () {
             name: "choiceUpdate",
             type: "input",
             message: "What is the ID of the employee you want to update?",
-           //Display table with all employees here and user chooses from table?
+        
             },
             {
                 name: "role",
                 type: "list",
                 message: "What is the employee's new role?",
-                choices:  ["Salesperson", "Finance Manager", "Accountant"]
+                choices:  ["Salesperson", "Finance Manager", "Accountant", "IT"]
             }]) 
+            //join with role table
              .then(function (response) {
                 console.table(response)
-//add sql code here?
+                let query = connection.query("UPDATE employee SET WHERE title = ?", 
     start()
-            })
+                )})
         }
  
 
