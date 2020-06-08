@@ -273,7 +273,7 @@ function employee () {
                 choices:  ["Salesperson", "Finance Manager", "Accountant", "IT"]
             }]) 
             //join with role table
-            let query = "SELECT * FROM tracker_db.employee";
+            query = "SELECT * FROM tracker_db.employee";
             query += "JOIN tracker_db.role";
             query += "ON employee.role_ID = ID_PK";
             connection.query(query, function(err, res) {
