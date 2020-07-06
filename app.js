@@ -228,7 +228,7 @@ function addEmployee() {
                 role();
                 break;
             default: console.log("Please enter appropriate choice.")   
-            //need console.table prompt here
+          
         }   
     })
 }
