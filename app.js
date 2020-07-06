@@ -254,7 +254,7 @@ function employee () {
              })}
 
  function updateEmployeeRole() {
-     let query = "SELECT * FROM employee"
+      query = "SELECT * FROM employee"
      connection.query(query, function(err, res) {
         console.table(res)
      })
@@ -269,20 +269,19 @@ function employee () {
             {
                 name: "role",
                 type: "list",
-                message: "What is the employee's new role?",
-                choices:  ["Salesperson", "Finance Manager", "Accountant", "IT"]
+                message: "What is the employee's new role ID number?",
+                choices:  [1, 2, 3, 4]
             }]) 
-            //join with role table
-            query = "SELECT * FROM tracker_db.employee";
-            query += "JOIN tracker_db.role";
-            query += "ON employee.role_ID = ID_PK";
+            
+           let query = "SELECT * FROM employee";
+            query = "UPDATE role_ID";
             connection.query(query, function(err, res) {
                 console.table(res)
-                //start()
+                
             
              .then(function (response) {
                 console.table(response)
-                let query = connection.query("UPDATE employee SET WHERE title = ?", 
+                let query = connection.query("UPDATE employee SET WHERE role_ID = ?", 
     start()
                 )})
              })}
