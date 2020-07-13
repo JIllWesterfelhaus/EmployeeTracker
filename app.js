@@ -235,8 +235,11 @@ function view() {
             }
         })
 }
+//attempting to join employee and role tables
+
 function employee() {
-    let query = "SELECT * FROM employee" //inner join this table with role table.
+    let query = "SELECT * FROM employee";
+   "FROM employee JOIN role ON (employee.role_ID = ID_PK)";
     connection.query(query, function (err, res) {
         console.table(res)
         start()
@@ -277,13 +280,13 @@ function updateEmployeeRole() {
                     type: "list",
                     choices: organizedEmployeeData,
                     name: "targetEmp",
-                    message: "Who's role needs to change?"
+                    message: "Whose role needs to change?"
                 }, {
                     // whats the new role we wanna give him? -- what are all the roles available?
                     type: "list",
                     choices: organizedRoleData,
                     name: "targetRole",
-                    message: "What do they do now?"
+                    message: "What is their new role?"
                 }
             ]).then(({ targetEmp, targetRole }) => {
                 let id = targetEmp.split(":")[0]; // targetEmp = "6: Dwifht Shrute"
