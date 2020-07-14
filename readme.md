@@ -26,7 +26,7 @@ This was built with MySQL and Inquirer.
 
 This app is complete.
 
-
+![screen shot](Screenshot.png)
 
 ## Credits
 

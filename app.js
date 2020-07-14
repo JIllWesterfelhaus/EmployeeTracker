@@ -238,8 +238,8 @@ function view() {
 //attempting to join employee and role tables
 
 function employee() {
-    let query = "SELECT * FROM employee";
-   "FROM employee JOIN role ON (employee.role_ID = ID_PK)";
+    let query = "SELECT * FROM employee"
+
     connection.query(query, function (err, res) {
         console.table(res)
         start()
