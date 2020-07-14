@@ -28,6 +28,12 @@ This app is complete.
 
 ![screen shot](Screenshot.png)
 
+## Demo
+
+Here is a YouTube link to a demo of the completed app:
+
+https://www.youtube.com/watch?v=Wnf_Xda5yEI
+
 ## Credits
 
 I wish to thank my tutor, Daniel Masters, and TA Paul Cwik for helping me with this assignment. 
